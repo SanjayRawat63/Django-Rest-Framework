@@ -1,7 +1,7 @@
 from os import stat_result
 from re import T
 import re
-from emplist_app.api.serializers import EmployeeSerializer
+from emplist_app.api.serializers import EmployeeSerializer,RegistrationSerializer
 from emplist_app.models import employees
 from rest_framework.response import Response
 from rest_framework.decorators import APIView
@@ -50,3 +50,36 @@ class EmployeeDetails(APIView):
         emp_list.delete()
         return Response({"msg": "Employee Details successfully deleted"}, status=status.HTTP_204_NO_CONTENT)
  
+ 
+# @api_view(['POST'])
+# def logout_view(request):
+
+#     if request.method == 'POST':
+#         request.user.auth_token.delete()
+#         return Response(status=status.HTTP_200_OK)
+
+
+# @api_view(['POST'])
+# def registration_view(request):
+
+#     if request.method == 'POST':
+#         serializer = RegistrationSerializer(data=request.data)
+        
+#         data = {}
+        
+#         if serializer.is_valid():
+#             account = serializer.save()
+            
+#             data['response'] = "Registration Successful!"
+#             data['username'] = account.username
+#             data['email'] = account.email
+#             refresh = RefreshToken.for_user(account)
+#             data['token'] = {
+#                                  'refresh': str(refresh),
+#                                  'access': str(refresh.access_token),
+#                              }
+       
+#         else:
+#             data = serializer.errors
+        
+#         return Response(data, status=status.HTTP_201_CREATED)
