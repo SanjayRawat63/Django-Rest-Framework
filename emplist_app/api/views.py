@@ -13,7 +13,7 @@ class EmployeesList(APIView):
          serializer=EmployeeSerializer(emp_list,many=True)
          return Response(serializer.data)
      
-    def put(self,request):
+    def post(self,request):
         serializer = EmployeeSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -46,5 +46,5 @@ class EmployeeDetails(APIView):
     def delete(self,request,pk):
         emp_list=employees.objects.get(pk=pk)
         emp_list.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({"msg": "Employee Details successfully deleted"}, status=status.HTTP_204_NO_CONTENT)
  
