@@ -6,8 +6,10 @@ from emplist_app.models import employees
 from rest_framework.response import Response
 from rest_framework.decorators import APIView
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+
 class EmployeesList(APIView):
-    
+    permission_classes=[IsAuthenticated]
     def get(self,request):
          emp_list = employees.objects.all()
          serializer=EmployeeSerializer(emp_list,many=True)
@@ -22,7 +24,7 @@ class EmployeesList(APIView):
             return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
          
 class EmployeeDetails(APIView):
-    
+   
     def get(self,request,pk):
         try:
             emp_list = employees.objects.get(pk=pk)
